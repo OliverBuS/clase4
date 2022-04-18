@@ -34,16 +34,15 @@ public class SearchController {
     @GetMapping(value = {"/Salario"})
     public String listaEmpleadosMayorSalrio (Model model){
 
-        model.addAttribute("lista", employeesRepository.empleadoMayor());
+
 
         return "Search/lista2";
     }
 
     @PostMapping("/busqueda")
-    public String buscar (@RequestParam("search") @Valid Integer busqueda, Model model.RedirectAttributes attr){
+    public String buscar (@RequestParam("search") @Valid Integer busqueda){
 
-        attr.addFlashAttribute("msg", "Valor no soportado");
-        model.addAttribute("lista", employeesRepository.listaMayorSalario(busqueda));
+
         return "Search/lista2";
 
         //COMPLETAR
