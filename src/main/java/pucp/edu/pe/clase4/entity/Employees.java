@@ -26,7 +26,9 @@ public class Employees {
     @Size(max = 25, message = "El apellido no puede tener más de 25 caracteres")
     private String lastname;
 
+    @NotBlank
     @Column(nullable = false)
+    @Size(max = 25, message = "El correo no puede tener más de 25 caracteres")
     @Email(message = "Se debe seguir el formato siguiente: nombre@correo.com")
     private String email;
 

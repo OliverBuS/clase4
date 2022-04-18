@@ -66,7 +66,6 @@ public class EmployeeController {
         if(bindingResult.hasErrors()){
             model.addAttribute("listaJobs", jobsRepository.findAll());
             model.addAttribute("listaJefes", employeesRepository.findAll());
-            model.addAttribute("listaDepartments", departmentsRepository.findAll());
             model.addAttribute("listaDepartaments", departmentsRepository.findAll());
             model.addAttribute("listaJobs", jobsRepository.findAll());
 
@@ -80,6 +79,7 @@ public class EmployeeController {
             model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
             return "employee/formulario";
         }else {
+
             if (employees.getEmployeeid() == 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
                 employees.setHiredate(new Date());
