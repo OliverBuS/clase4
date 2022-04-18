@@ -13,7 +13,7 @@
     <h1>Empleados con Mayor Salario en la Empresa</h1>
     <!-- COMPLETAR -->
     <form class="input-group mb-lg-3" method="post" th:action="@{'/Search/busqueda'}">
-        <input type="number" class="form-control" placeholder="Digita el salario a buscar" name="search">
+        <input type="number" class="form-control" placeholder="Salario a buscar" name="search">
         <div class="input-group-append">
             <button class="btn btn-outline-primary ml-2 mr-2" type="submit">Buscar</button>
             <a th:href="@{'/Search/Salario'}" class="btn btn-outline-danger">Limpiar</a>
