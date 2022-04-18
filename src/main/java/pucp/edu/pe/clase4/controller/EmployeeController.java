@@ -34,7 +34,7 @@ public class EmployeeController {
     @Autowired
     DepartmentsRepository departmentsRepository;
 
-    @GetMapping(value = {"","/"})
+    @GetMapping(value = {""})
     public String listaEmployee(Model model){
         model.addAttribute("listaEmployee", employeesRepository.findAll());
         model.addAttribute("listaJobs", jobsRepository.findAll());
@@ -45,7 +45,7 @@ public class EmployeeController {
     @GetMapping("/new")
     public String nuevoEmployeeForm() {
         //COMPLETAR
-        return "employee/Frm";
+        return "employee/formulario";
     }
 
     @PostMapping("/save")
@@ -57,7 +57,7 @@ public class EmployeeController {
             model.addAttribute("listaJobs", jobsRepository.findAll());
             model.addAttribute("listaJefes", employeesRepository.findAll());
             model.addAttribute("listaDepartments", departmentsRepository.findAll());
-            return "employee/Frm";
+            return "employee/formulario";
         }else {
 
             if (employees.getEmployeeid() == 0) {
@@ -97,7 +97,7 @@ public class EmployeeController {
             }
             model.addAttribute("listaJobs", jobsRepository.findAll());
             model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
-            return "employee/Frm";
+            return "employee/formulario";
         } else {
             return "redirect:/employee";
         }
