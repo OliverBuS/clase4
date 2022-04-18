@@ -12,7 +12,7 @@
         <div class="container">
             <h1>Lista de Empleados</h1>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{'/employee/new'}">Nuevo Empleado</a>  <!-- COMPLETAR -->
-            <!-- COMPLETAR -->
+            <div th:if="${msg!=null}" class="alert alert-success" th:text="${msg}"></div>
             </form>
             <!-- COMPLETAR -->
             <table class="table">  <!-- COMPLETAR -->
