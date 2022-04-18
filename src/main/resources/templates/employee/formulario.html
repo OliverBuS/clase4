@@ -40,17 +40,17 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-6" th:if="${employees.employeeid}">
-        <label for="jobid">Cargo</label>
-        <select class="form-control" th:field="*{jobid}">
+      <div class="form-group col-6" th:if="${employees.employeeid == 0}">
+        <label for="job">Cargo</label>
+        <select class="form-control" id="job" th:field="*{jobid.jobid}">
           <option th:each="trabajo: ${listaJobs}" th:value="${trabajo.jobid}" th:text="${trabajo.jobtitle}"></option>
         </select>
       </div>
-      <div class="form-group col-6" th:unless="${employees.employeeid}">
-        <label for="jobid">Cargo</label>
-        <select class="form-control" th:field="*{jobid}">
+      <div class="form-group col-6" th:unless="${employees.employeeid == 0}">
+        <label for="job">Cargo</label>
+        <select class="form-control" id="job" th:field="*{jobid.jobid}">
           <option th:each="trabajo: ${listaJobs}" th:value="${trabajo.jobid}" th:text="${trabajo.jobtitle}"
-                  th:selected="${trabajo.jobid == employees.jobid}"></option>
+                  th:selected="${trabajo.jobid == employees.jobid.jobid}"></option>
         </select>
       </div>
       <div class="form-group col-6">
@@ -60,17 +60,17 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-6" th:if="${employees.managerid}">
+      <div class="form-group col-6" th:if="${employees.manager.employeeid == 0}">
         <label for="managerid">Jefe</label>
-        <select class="form-control" th:field="${employees.managerid.employeeid}">
+        <select class="form-control" id="managerid" th:field="${employees.manager.employeeid}">
           <option th:each="jefe: ${listaDepartamentosconJefes}" th:value="${jefe.managerid.employeeid}"
                   th:text="${jefe.managerid.firstname} + ' ' + ${jefe.managerid.lastname}">
           </option>
         </select>
       </div>
-      <div class="form-group col-6" th:unless="${employees.managerid}">
+      <div class="form-group col-6" th:unless="${employees.managerid == 0}">
         <label for="managerid">Jefe</label>
-        <select class="form-control" th:field="${employees.managerid.employeeid}">
+        <select class="form-control" id="managerid" th:field="${employees.managerid.employeeid}">
           <option th:each="jefe: ${listaDepartamentosconJefes}"
                   th:value="${jefe.managerid.employeeid}"
                   th:text="${jefe.managerid.firstname} + ' ' + ${jefe.managerid.lastname}"
@@ -78,21 +78,21 @@
           </option>
         </select>
       </div>
-      <div class="form-group col-6" th:if="${employees.employeeid}">
+      <div class="form-group col-6" th:if="${employees.employeeid==0}">
         <label for="firstname">Departamento</label>
-        <select class="form-control" th:field="*{departmentid}">
+        <select class="form-control" th:field="*{departmentid.id}">
           <option th:each="departamento: ${listaDepartaments}"
                   th:value="${departamento.id}"
                   th:text="${departamento.departmentname}"></option>
         </select>
       </div>
-      <div class="form-group col-6" th:unless="${employees.employeeid}">
+      <div class="form-group col-6" th:unless="${employees.employeeid==0}">
         <label for="firstname">Departamento</label>
-        <select class="form-control" th:field="*{departmentid}">
+        <select class="form-control" th:field="*{departmentid.id}">
           <option th:each="departamento: ${listaDepartaments}"
                   th:value="${departamento.id}"
                   th:text="${departamento.departmentname}"
-                  th:selected="${departamento.id == employees.departmentid}"></option>
+                  th:selected="${departamento.id == employees.departmentid.id}"></option>
         </select>
       </div>
     </div>
