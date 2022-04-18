@@ -1,6 +1,5 @@
 package pucp.edu.pe.clase4.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,12 +33,14 @@ public class SearchController {
     @GetMapping(value = {"/Salario"})
     public String listaEmpleadosMayorSalrio (Model model){
 
+        model.addAttribute("lista", employeesRepository.empleadoMayor());
         return "Search/lista2";
     }
 
     @PostMapping("/busqueda")
-    public String buscar (@RequestParam("search") @Valid Integer busqueda){
-
+    public String buscar (@RequestParam("search") @Valid Integer busqueda, Model model, RedirectAttributes attr){
+        attr.addFlashAttribute("msg", "Valor no soportado");
+        model.addAttribute("lista", employeesRepository.listaMayorSalario(busqueda));
 
         return "Search/lista2";
 
