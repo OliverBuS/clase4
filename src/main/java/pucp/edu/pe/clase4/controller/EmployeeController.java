@@ -55,7 +55,6 @@ public class EmployeeController {
             }
         }
         model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
-
         return "employee/formulario";
     }
 
@@ -68,9 +67,19 @@ public class EmployeeController {
             model.addAttribute("listaJobs", jobsRepository.findAll());
             model.addAttribute("listaJefes", employeesRepository.findAll());
             model.addAttribute("listaDepartments", departmentsRepository.findAll());
+            model.addAttribute("listaDepartaments", departmentsRepository.findAll());
+            model.addAttribute("listaJobs", jobsRepository.findAll());
+
+            List<Departments> departmentOpt = departmentsRepository.findAll();
+            List<Departments> departamentosFinales = new ArrayList<Departments>();
+            for (Departments i : departmentOpt){
+                if(i.getManagerid() != null){
+                    departamentosFinales.add(i);
+                }
+            }
+            model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
             return "employee/formulario";
         }else {
-
             if (employees.getEmployeeid() == 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
                 employees.setHiredate(new Date());
