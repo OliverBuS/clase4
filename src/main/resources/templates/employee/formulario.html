@@ -60,15 +60,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-6" th:if="${employees.manager.employeeid == 0}">
+      <div class="form-group col-6" th:if="${employees.employeeid == 0}">
         <label for="managerid">Jefe</label>
-        <select class="form-control" id="managerid" th:field="${employees.manager.employeeid}">
+        <select class="form-control" id="managerid" th:field="${employees.managerid.employeeid}">
           <option th:each="jefe: ${listaDepartamentosconJefes}" th:value="${jefe.managerid.employeeid}"
                   th:text="${jefe.managerid.firstname} + ' ' + ${jefe.managerid.lastname}">
           </option>
         </select>
       </div>
-      <div class="form-group col-6" th:unless="${employees.managerid == 0}">
+      <div class="form-group col-6" th:unless="${employees.employeeid == 0}">
         <label for="managerid">Jefe</label>
         <select class="form-control" id="managerid" th:field="${employees.managerid.employeeid}">
           <option th:each="jefe: ${listaDepartamentosconJefes}"
