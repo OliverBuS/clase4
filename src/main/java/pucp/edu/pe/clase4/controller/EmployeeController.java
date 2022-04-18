@@ -43,8 +43,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String nuevoEmployeeForm() {
-        //COMPLETAR
+    public String nuevoEmployeeForm(@ModelAttribute("employees") Employees employees, Model model) {
+        model.addAttribute("listaDepartaments", departmentsRepository.findAll());
+        model.addAttribute("listaJobs", jobsRepository.findAll());
+
+        List<Departments> departmentOpt = departmentsRepository.findAll();
+        List<Departments> departamentosFinales = new ArrayList<Departments>();
+        for (Departments i : departmentOpt){
+            if(i.getManagerid() != null){
+                departamentosFinales.add(i);
+            }
+        }
+        model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
+
         return "employee/formulario";
     }
 
