@@ -13,8 +13,13 @@
             <h1>Lista de Empleados</h1>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{'/employee/new'}">Nuevo Empleado</a>  <!-- COMPLETAR -->
             <div th:if="${msg!=null}" class="alert alert-success" th:text="${msg}"></div>
+            <form class="form-group mb-3" method="get" th:action="@{'/employee/search'}">
+                <div class="input-group-append">
+                    <input class="form-control mr-2" placeholder="Ingrese la búsqueda" name="search" th:value="${search}">
+                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    <a class="btn btn-outline-danger ml-2" th:href="@{/employee}">Limpiar</a>
+                </div>
             </form>
-            <!-- COMPLETAR -->
             <table class="table">  <!-- COMPLETAR -->
                 <thead>
                     <tr>

@@ -41,6 +41,14 @@ public class EmployeeController {
         model.addAttribute("listaDepartments", departmentsRepository.findAll());
         return "employee/lista";
     }
+    @GetMapping(value = {"/search"})
+    public String listaEmployee(Model model, @RequestParam("search") String search){
+        model.addAttribute("search", search);
+        model.addAttribute("listaEmployee", employeesRepository.buscarEmpleadoGeneral(search.toLowerCase()));
+        model.addAttribute("listaJobs", jobsRepository.findAll());
+        model.addAttribute("listaDepartments", departmentsRepository.findAll());
+        return "employee/lista";
+    }
 
     @GetMapping("/new")
     public String nuevoEmployeeForm(@ModelAttribute("employees") Employees employees, Model model) {

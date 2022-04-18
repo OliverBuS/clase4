@@ -11,6 +11,19 @@ import java.util.List;
 @Repository
 public interface EmployeesRepository extends JpaRepository<Employees,Integer> {
 
+    @Query(value="select * from employees e\n" +
+            "join departments d on d.department_id = e.department_id\n" +
+            "join jobs j on e.job_id = j.job_id\n" +
+            "join locations l on d.location_id = l.location_id\n" +
+            "where\n" +
+            "    LOWER(e.first_name) like %?1% or\n" +
+            "    LOWER(e.last_name) like %?1% or\n" +
+            "    LOWER(j.job_title) like %?1% or\n" +
+            "    LOWER(d.department_name) like %?1% or\n" +
+            "    LOWER(l.city) like %?1%",nativeQuery = true)
+    List<Employees> buscarEmpleadoGeneral(String search);
+
+
     @Query(value="select * from employees e " +
             "where e.first_name like %?1% or e.last_name like %?1%\n",nativeQuery = true)
     List<Employees> listarEmpleadosPorNombreApellido(String name);
