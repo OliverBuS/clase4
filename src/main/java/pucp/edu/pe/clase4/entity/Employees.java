@@ -1,8 +1,10 @@
 package pucp.edu.pe.clase4.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 
 @Entity
@@ -11,118 +13,68 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", nullable = false)
-    private Integer id;
+    @Column(name = "employee_id")
+    private int employeeid;
 
-    @Column(name = "first_name", length = 20)
-    private String firstName;
+    @NotBlank
+    @Column(name = "first_name")
+    private String firstname;
 
-    @Column(name = "last_name", nullable = false, length = 25)
-    private String lastName;
+    @Column(name = "last_name",nullable = false)
+    @NotBlank
+    private String lastname;
 
-    @Column(name = "email", nullable = false, length = 25)
+    @Column(nullable = false)
+    @Email(message = "Se debe seguir el formato siguiente: nombre@correo.com")
     private String email;
 
-    @Column(name = "password", length = 65)
+    @NotBlank (message = "No puede dejar el campo vacío")
     private String password;
 
-    @Column(name = "phone_number", length = 20)
-    private String phoneNumber;
+    @Column(name = "phone_number")
+    private String phonenumber;
 
-    @Column(name = "hire_date", nullable = false)
-    private Instant hireDate;
+    @Column(name = "hire_date")
+    private Date hiredate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "job_id", nullable = false)
-    private Jobs job;
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Jobs jobid;
 
-    @Column(name = "salary", precision = 8, scale = 2)
-    private BigDecimal salary;
+    @Positive
+    private int salary;
 
-    @Column(name = "commission_pct", precision = 2, scale = 2)
-    private BigDecimal commissionPct;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "manager_id")
-    private Employees manager;
+    private Employees managerid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "department_id")
-    private Departments department;
+    private Departments departmentid;
+    private int enabled;
 
-    @Column(name = "enabled")
-    private Integer enabled;
-
-    public Integer getEnabled() {
-        return enabled;
+    public int getEmployeeid() {
+        return employeeid;
     }
 
-    public void setEnabled(Integer enabled) {
-        this.enabled = enabled;
+    public void setEmployeeid(int employeeid) {
+        this.employeeid = employeeid;
     }
 
-    public Departments getDepartment() {
-        return department;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setDepartment(Departments department) {
-        this.department = department;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public Employees getManager() {
-        return manager;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setManager(Employees manager) {
-        this.manager = manager;
-    }
-
-    public BigDecimal getCommissionPct() {
-        return commissionPct;
-    }
-
-    public void setCommissionPct(BigDecimal commissionPct) {
-        this.commissionPct = commissionPct;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public Jobs getJob() {
-        return job;
-    }
-
-    public void setJob(Jobs job) {
-        this.job = job;
-    }
-
-    public Instant getHireDate() {
-        return hireDate;
-    }
-
-    public void setHireDate(Instant hireDate) {
-        this.hireDate = hireDate;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -133,28 +85,68 @@ public class Employees {
         this.email = email;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public Integer getId() {
-        return id;
+    public Date getHiredate() {
+        return hiredate;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
+    }
+
+    public Jobs getJobid() {
+        return jobid;
+    }
+
+    public void setJobid(Jobs jobid) {
+        this.jobid = jobid;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public Employees getManagerid() {
+        return managerid;
+    }
+
+    public void setManagerid(Employees managerid) {
+        this.managerid = managerid;
+    }
+
+    public Departments getDepartmentid() {
+        return departmentid;
+    }
+
+    public void setDepartmentid(Departments departmentid) {
+        this.departmentid = departmentid;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 
     //COMPLETAR
