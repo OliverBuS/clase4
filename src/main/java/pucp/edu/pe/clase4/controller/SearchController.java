@@ -34,8 +34,6 @@ public class SearchController {
     @GetMapping(value = {"/Salario"})
     public String listaEmpleadosMayorSalrio (Model model){
 
-
-
         return "Search/lista2";
     }
 

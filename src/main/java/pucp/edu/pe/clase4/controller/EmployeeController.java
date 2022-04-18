@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pucp.edu.pe.clase4.entity.Departments;
 import pucp.edu.pe.clase4.entity.Employees;
 import pucp.edu.pe.clase4.repository.DepartmentsRepository;
 import pucp.edu.pe.clase4.repository.EmployeesRepository;
@@ -15,7 +16,9 @@ import pucp.edu.pe.clase4.repository.JobsRepository;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -78,9 +81,27 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit")
-    public String editarEmployee() {
+    public String editarEmployee(Model model, @RequestParam("id") int id, @ModelAttribute("employees") Employees employees, RedirectAttributes redirectAttributes) {
+        Optional<Employees> employeesOptional = employeesRepository.findById(id);
+        if (employeesOptional.isPresent()) {
+            employees = employeesOptional.get();
 
-        //COMPLETAR
+            model.addAttribute("employees", employees);
+            model.addAttribute("listaDepartaments", departmentsRepository.findAll());
+            List<Departments> departmentOpt = departmentsRepository.findAll();
+            List<Departments> departamentosFinales = new ArrayList<Departments>();
+            for (Departments i : departmentOpt){
+                if(i.getManagerid() != null){
+                    departamentosFinales.add(i);
+                }
+            }
+            model.addAttribute("listaJobs", jobsRepository.findAll());
+            model.addAttribute("listaDepartamentosconJefes", departamentosFinales);
+            return "employee/Frm";
+        } else {
+            return "redirect:/employee";
+        }
+
     }
 
     @GetMapping("/delete")
@@ -99,9 +120,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/search")
-    public String buscar (){
-
-        //COMPLETAR
+    public String buscar (@RequestParam("name") String name, Model model){
+        List<Employees> employeesOpt = employeesRepository.listarEmpleadosPorNombreApellido(name);
+        model.addAttribute("listaEmployee",employeesOpt);
+        return "employee/lista";
     }
 
 }
